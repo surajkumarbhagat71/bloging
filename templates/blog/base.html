@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BLOG</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+
+
+</head>
+<body style="background-color: #99babf">
+
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark" style="background-color:#0f6674;">
+  <a class="navbar-brand ml-5" href="{% url 'home' %}"><b>OUR THOUGHT</b></a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <form class="form-inline my-2 mx-auto" method="get" action="{% url 'serach' %}" style="display: flex;justify-content: center">
+          <input class="form-control mx-auto" name="search" type="search" placeholder="Search by Title  or Category , Author" size="60px">
+          <button class="btn my-2 my-sm-0" type="submit" style="margin-left: -80px">Search</button>
+    </form>
+
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link mr-4" href="{% url 'home' %}">Home</a>
+            </li>
+
+             <li class="nav-item active">
+                <a class="nav-link mr-4" href="{% url 'about' %}">About</a>
+             </li>
+
+             <li class="nav-item active">
+                <a class="nav-link mr-4" href="{% url 'profile' %}">My Blog</a>
+            </li>
+             <li class="nav-item active">
+                <a class="nav-link mr-4" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link ml-3" href="{% url 'home' %}">Home</a>
+            </li>
+
+             <li class="nav-item ml-3">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+             </li>
+
+            <li class="nav-item">
+                <a class="nav-link ml-3" href="{% url 'signup' %}">Signup</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-3 " href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+  </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#128294; color: white">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContenta" aria-controls="navbarSupportedContenta" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContenta">
+       <ul class="navbar-nav">
+             <li class="nav-item">
+                <a class="nav-link active ml-3" href="{% url 'home' %}">All</a>
+            </li>
+            {% for c in category %}
+            <li class="nav-item">
+                <a class="nav-link ml-1" href="{% url 'catblog' c.cat_id %}">{{ c.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+
+</body>
+</html>

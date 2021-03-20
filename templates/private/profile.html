@@ -1,0 +1,23 @@
+{% extends 'private/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mt-5 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body border-0 shadow-sm">
+                        <div class="row">
+                            <div class="col-lg-4"><img src="{{ profile.image.url }}" alt="" height="200px" class="card-img-top"></div>
+                            <div class="col-lg-6 mx-auto mt-3">
+                                <h5 class="lead"><b>Title :</b> <span class="ml-4">{{ profile.name }}</span></h5>
+                                <h5 class="lead"><b>Email :</b> <span class="ml-3"> {{ profile.users.email  }}</span></h5>
+                                <h5 class="lead"><b>Contact :</b><span class="ml-2"> {{ profile.contact }}</span></h5>
+                                <a href="{% url 'updateprofile' profile.user_id %}" class="btn btn-primary mt-5">Update Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

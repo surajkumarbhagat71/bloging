@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="card border-0 ">
+                    <div class="card-body shadow-sm border-0">
+                        <h5 class="text-center text-success mb-3"><i><b>Signup</b></i></h5>
+                        <form action="{% url 'signup' %}" method="post">
+                            {% csrf_token %}
+                                <table class="table">
+                                    {{ form|crispy }}
+
+                                    <h5> Q  : {{ no1 }} {{ opr }} {{ no2 }}</h5>
+
+                                    <input type="hidden" value="{{ ans }}" name="ans1">
+                                    <input type="text" placeholder="Ans the Above" class="form-control" name="ans2">
+
+                                </table>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success btn-block">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+
+{% endblock %}

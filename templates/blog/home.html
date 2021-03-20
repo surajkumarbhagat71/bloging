@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="row">
+        {% if blog|length > 0 %}
+            {% for foo in blog %}
+            <div class="col-lg-10 mx-auto mt-3">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header">
+                        <a href="{% url 'blogofprofile' foo.bloger.user_id %}" class="nav-link">
+                        <img src="{{ foo.bloger.image.url }}" alt="" style="height:50px;width: 50px;border-radius: 50%">
+                        <span  class="ml-2" style="font-size:25px;"><b>{{ foo.bloger.name }}</b></span>
+                        </a>
+                    </div>
+                    <div class="card-body border-0 shadow-sm">
+                        {% if foo.image %}
+                            <h5 class="display-5 ml-2 mb-3"><b>Title :</b> {{ foo.title }}
+                                <span class="text-success mb-2 " style="float:right">
+                                   Views--{{ foo.blogview_set.count }}</span></h5>
+                            <img src="{{ foo.image.url }}" alt="" class="card-img-top" height="300px">
+                            <h5 class="display-5 mt-3 mb-2"><i>{{ foo.category.title }}</i></h5>
+                            <h5 class="mt-3 mb-2 lead"><b>Discriptions : </b>{{ foo.blog|slice:"300" }}<span class="ml-2 mt-2"><a href="{% url 'blogdetail' foo.b_id %}" class="ml-auto"><b>Read More</b></a></span></h5>
+                        {% else %}
+                            <h5 class="display-5 ml-2 mb-3">Title : {{ foo.title }}
+                                <span class="text-success mb-2 " style="float:right">
+                                   Views--{{ foo.blogview_set.count }}</span></h5>
+                            <h5 class="display-5 mt-3 ml-2 mb-2"><i>{{ foo.category.title }}</i></h5>
+                            <h5 class="mt-3 mb-2 ml-2 lead"><b>Discriptions : </b>{{ foo.blog|slice:"300" }}<span class="ml-2 mt-2 "><a href="{% url 'blogdetail' foo.b_id %}" class="ml-auto "><b>Read More</b></a></span></h5>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+           <div class="alert mx-auto mt-5 bg-warning" role="alert">
+               <b class="">Data Not Found !</b>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+{% endblock %}
+
+
